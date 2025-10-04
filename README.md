@@ -8,11 +8,15 @@
 
 미리 생성된 데이터셋(HDF5 형식)과 각 알고리즘을 위한 Docker 컨테이너를 사용하여 성능을 측정하고, 시각화 결과를 제공해 줍니다 
 
+<br>
+
 ## 테스트 환경
 
 github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hyperthreading을 제거하고 수행하였습니다 
 
 ![image.png](src/image%201.png)
+
+<br>
 
 테스트환경은 github에 명기된 인스턴스 보다, 작은 환경이며 다음과 같습니다 
 
@@ -23,6 +27,7 @@ github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hy
 ![image.png](src/image%202.png)
 
 
+<br>
 
 부트볼륨 IOPS를 최대로 구성했습니다. (github의 AWS인스턴스 IO 최대대역폭은 20Gbps) 
 
@@ -31,6 +36,8 @@ github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hy
  
 
 ## 벤치마크 환경 구성
+
+<br>
 
 benchmark가 파이썬 3.10에서 테스트 되었으므로, 간단하게 dnf도구로 파이썬 환경을 3.11 을 구성합니다 
 
@@ -59,6 +66,7 @@ $ python -m venv annbench
 $ source annbench/bin/activate
 
 ```
+<br>
 
 git을 구성하고 clone합니다 
 
@@ -72,6 +80,7 @@ remote: Total 8199 (delta 0), reused 0 (delta 0), pack-reused 8199 (from 1)
 Receiving objects: 100% (8199/8199), 21.88 MiB | 8.34 MiB/s, done.
 Resolving deltas: 100% (5207/5207), done.
 ```
+<br>
 
 라이브러리를 설치합니다
 
@@ -79,6 +88,7 @@ Resolving deltas: 100% (5207/5207), done.
 $ cd ann-benchmarks/
 $ pip install -r requirements.txt 
 ```
+<br>
 
 도커를 구성하고, install.py 를 실행합니다 
 
@@ -95,6 +105,7 @@ $ sudo /usr/sbin/usermod -aG docker opc
 
 터미널을 로그아웃 후 다시 로그인해야 docker관련 권한이 반영됩니다
 ```
+<br>
 
 install.py 를 실행할때, 파라메터로 도커 빌드를 위한 proc값을 올리거나, 특정 algorithm을 지정할 수 있습니다 
 
@@ -109,6 +120,7 @@ options:
   --build-arg BUILD_ARG [BUILD_ARG ...]
                         pass given args to all docker builds (default: None)
 ```
+<br>
 
 파라메터 없이 기본 커맨드로 수행하면, 약 1시간의 도커 컴파일이 진행되고, 결과를 뿌려 줍니다
 
@@ -177,12 +189,14 @@ Install Status:
 {'weaviate': 'success'}
 {'__pycache__': 'fail'}
 ```
+<br>
 
 cpu를 16개를 써서 빌드하면, 수분만에 종료됩니다
 
 ```bash
 $ python install.py --proc 16
 ```
+<br>
 
 개별 알고리즘만 지정하여 빌드할 수도 있습니다
 
@@ -193,9 +207,12 @@ $ python install.py --proc 16 --algorithm qdrant
 
 # 벤치마크 테스트
 
+<br>
+
 run.py 를 실행하여, vector 검색 벤치마크를 테스트합니다
 
 주요 파라메터로, algorithm, dataset, runs, parallelism, count, batch 등을 지정하여 수행할 수 있습니다
+<br>
 
 - 파라메터
     - algorithm : 테스트할 솔루션. default 는 None
@@ -234,6 +251,7 @@ options:
                         Number of Docker containers in parallel (default: 1)
 
 ```
+<br>
 
 pgvector에서 glove-25-angular 데이터 셋(121MB) 을 벤치마크합니다 
 
@@ -242,6 +260,7 @@ m 16 기준으로 인덱스 빌드는 15분 이상 소요되고, 쿼리수행도
 m 24 기준으로는 더 큰 인덱스 사이즈, 더 긴 인덱스 빌드 타임이 필요합니다
 
 디폴트 값으로 수행시 runs가 default 5이기 때문에 쿼리를 5번 수행하여 가장 좋은 값을 결과로 뽑아내고, M 16, 24 두개의 인덱스 옵션 기준으로 테스트를 수행합니다 
+<br>
 
 HNSW 인덱스에서 m, ef_construction 개념 
 
@@ -295,10 +314,12 @@ M 24기준으로 컨테이너를 초기화하고 전체 테스트를 재 수행.
 2024-09-10 08:28:23,610 - annb.b145cdc0a4e5 - INFO -  * Starting PostgreSQL 16 database server
 
 ```
+<br>
 
 glove 데이터셋의 구성입니다 
 
 ![image.png](src/image%205.png)
+<br>
 
 컨테이너의 postgresl에 psql기반으로 쿼리하여, 인덱스 빌드 상태를 볼수 있습니다 
 
@@ -343,6 +364,7 @@ $ while true; do docker exec -it 75cb425ce34f psql -d ann -U ann -c "SELECT phas
 
 중략..
 ```
+<br>
 
 인덱스 빌드 성능을 높이기 위한 파라메터 들입니다
 
@@ -353,6 +375,7 @@ SET maintenance_work_mem = '8GB';
 SET max_parallel_maintenance_workers = 7;
 SET max_parallel_workers =8;
 ```
+<br>
 
 runs를 1회만 수행하고, 모든 쿼리를 한번에 수행하는 batch 모드로 벤치를 수행합니다 
 
@@ -428,6 +451,8 @@ $ python run.py --dataset glove-25-angular --algorithm pgvector --runs 1 --batch
 
 ## 벤치마크 결과 정리
 
+<br>
+
 plot.py 의 파라메터 입니다. 
 
 ```bash
@@ -457,6 +482,7 @@ options:
   --recompute           Clears the cache and recomputes the metrics
 
 ```
+<br>
 
 create_website.py 의 파라메터입니다. 
 
@@ -477,12 +503,15 @@ options:
   --recompute           Clears the cache and recomputes the metrics
 
 ```
+<br>
 
 plot.py 를 실행시 권한 에러가 날수 있는데, 벤치마크 결과가 저장되는 result 내부 디렉토리들의 권한 문제입니다. 
 
 다음과 같은 권한 에러 메시지가 발생할 수 있습니다. 
 
 ![image.png](src/image%206.png)
+
+<br>
 
 권한관련 에러인데, 컨테이너 내부의 프로세스가 결과 파일을 기록하기 때문입니다. 
 
@@ -491,6 +520,7 @@ plot.py 를 실행시 권한 에러가 날수 있는데, 벤치마크 결과가 
 ```bash
 $ sudo chmod -R 775 ./results
 ```
+<br>
 
 벤치마크의 결과가 다음과 같이 파라메터로 구분되어 디렉토리 구조 하위에 hdf5 파일로 저장됩니다. 
 
@@ -544,6 +574,7 @@ $ tree
 `-- sift-128-euclidean.png
 
 ```
+<br>
 
 결과를 시각화하기 위해 벤치마크 테스트한 파라메터를 지정해 주면 됩니다. 
 
@@ -589,10 +620,12 @@ Computing knn metrics
 Computing knn metrics
  15:                               PGVector(m=24, ef_construction=200, ef_search=800)        1.000       72.266
 ```
+<br>
 
 테스트한 결과물 입니다. 
 
 ![glove-25-angular-batch.png](src/glove-25-angular-batch.png)
+<br>
 
 벤치마크 결과를 웹사이트로 만들도록 create_website.py 를 실행합니다. 
 
@@ -1174,6 +1207,7 @@ Building 'glove-25-angular_10_angular-batch'
 Building 'pgvector'
 Building 'pgvector-batch'
 ```
+<br>
 
 빌드한 html을 통해 더 디테일하고 인터랙티브한 결과 분석이 가능합니다. 
 
