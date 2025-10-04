@@ -1,16 +1,14 @@
 # [AI] ann benchmark 활용한 pgvector 벤치마크
 
-출처 : https://github.com/binidxaba/ann-benchmarks/tree/main
+ 
+## 개요
 
-![image.png](src/image.png)
+[Ann benchmark](https://github.com/binidxaba/ann-benchmarks/tree/main) 프로젝트는 다양한 근사 최근접 이웃(approximate nearest neighbor) 검색 솔루션들을 벤치마킹할 수 있는 도구를 제공합니다
 
-# 개요
-
-Ann benchmark 프로젝트는 다양한 근사 최근접 이웃(approximate nearest neighbor) 검색 솔루션들을 벤치마킹할 수 있는 도구를 제공합니다
 
 미리 생성된 데이터셋(HDF5 형식)과 각 알고리즘을 위한 Docker 컨테이너를 사용하여 성능을 측정하고, 시각화 결과를 제공해 줍니다 
 
-# 테스트 환경
+## 테스트 환경
 
 github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hyperthreading을 제거하고 수행하였습니다 
 
@@ -32,7 +30,7 @@ github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hy
 
  
 
-# 벤치마크 환경 구성
+## 벤치마크 환경 구성
 
 benchmark가 파이썬 3.10에서 테스트 되었으므로, 간단하게 dnf도구로 파이썬 환경을 3.11 을 구성합니다 
 
@@ -428,7 +426,7 @@ $ python run.py --dataset glove-25-angular --algorithm pgvector --runs 1 --batch
 
 ```
 
-# 벤치마크 결과 정리
+## 벤치마크 결과 정리
 
 plot.py 의 파라메터 입니다. 
 
