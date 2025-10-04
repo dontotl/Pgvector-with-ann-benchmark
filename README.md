@@ -2,7 +2,7 @@
 
 출처 : https://github.com/binidxaba/ann-benchmarks/tree/main
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image.png)
+![image.png](src/image.png)
 
 # 개요
 
@@ -14,7 +14,7 @@ Ann benchmark 프로젝트는 다양한 근사 최근접 이웃(approximate near
 
 github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hyperthreading을 제거하고 수행하였습니다 
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%201.png)
+![image.png](src/image%201.png)
 
 테스트환경은 github에 명기된 인스턴스 보다, 작은 환경이며 다음과 같습니다 
 
@@ -22,15 +22,15 @@ github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hy
 | --- | --- | --- | --- | 
 | ann-bench | benchmark 서버 | VM 16 CPU, 192GB Mem | 100 GB | 
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%202.png)
+![image.png](src/image%202.png)
 
 ssh key (2024-08-28)일자입니다. 
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%203.png)
+![image.png](src/image%203.png)
 
 부트볼륨 IOPS를 최대로 구성했습니다. (github의 AWS인스턴스 IO 최대대역폭은 20Gbps) 
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%204.png)
+![image.png](src/image%204.png)
 
 접속 커맨드는 다음과 같습니다 
 
@@ -306,7 +306,7 @@ M 24기준으로 컨테이너를 초기화하고 전체 테스트를 재 수행.
 
 glove 데이터셋의 구성입니다 
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%205.png)
+![image.png](src/image%205.png)
 
 컨테이너의 postgresl에 psql기반으로 쿼리하여, 인덱스 빌드 상태를 볼수 있습니다 
 
@@ -490,7 +490,7 @@ plot.py 를 실행시 권한 에러가 날수 있는데, 벤치마크 결과가 
 
 다음과 같은 권한 에러 메시지가 발생할 수 있습니다. 
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%206.png)
+![image.png](src/image%206.png)
 
 권한관련 에러인데, 컨테이너 내부의 프로세스가 결과 파일을 기록하기 때문입니다. 
 
@@ -600,7 +600,7 @@ Computing knn metrics
 
 테스트한 결과물 입니다. 
 
-![glove-25-angular-batch.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/glove-25-angular-batch.png)
+![glove-25-angular-batch.png](src/glove-25-angular-batch.png)
 
 벤치마크 결과를 웹사이트로 만들도록 create_website.py 를 실행합니다. 
 
@@ -1185,6 +1185,6 @@ Building 'pgvector-batch'
 
 빌드한 html을 통해 더 디테일하고 인터랙티브한 결과 분석이 가능합니다. 
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%207.png)
+![image.png](src/image%207.png)
 
-![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%208.png)
+![image.png](src/image%208.png)
