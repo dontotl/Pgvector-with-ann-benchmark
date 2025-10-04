@@ -18,9 +18,9 @@ github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hy
 
 테스트환경은 github에 명기된 인스턴스 보다, 작은 환경이며 다음과 같습니다 
 
-| VM | 용도 | Shape | Storage | Private IP |
-| --- | --- | --- | --- | --- |
-| ann-bench | benchmark 서버 | VM 16 CPU, 192GB Mem | 100 GB | 10.0.0.29 |
+| VM | 용도 | Shape | Storage | 
+| --- | --- | --- | --- | 
+| ann-bench | benchmark 서버 | VM 16 CPU, 192GB Mem | 100 GB | 
 
 ![image.png](%5BAI%5D%20ann%20benchmark%20%ED%99%9C%EC%9A%A9%ED%95%9C%20pgvector%20%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%200e0736cc5418484db5be191bf111b574/image%202.png)
 
