@@ -24,19 +24,13 @@ github 에서는 AWS의 r6i.16xlarge 인스턴스에서 `--parallelism 31`  hy
 
 ![image.png](src/image%202.png)
 
-ssh key (2024-08-28)일자입니다. 
 
-![image.png](src/image%203.png)
 
 부트볼륨 IOPS를 최대로 구성했습니다. (github의 AWS인스턴스 IO 최대대역폭은 20Gbps) 
 
 ![image.png](src/image%204.png)
 
-접속 커맨드는 다음과 같습니다 
-
-```bash
-$ ssh -i ./ssh-key-2024-08-28.key opc@193.122.108.176
-```
+ 
 
 # 벤치마크 환경 구성
 
